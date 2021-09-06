@@ -45,17 +45,20 @@ namespace AnimalWatchersUnited2
 
                 while (!reader.EndOfStream)
                 {
+                    //read first like as header and separate by commas
                     var line = reader.ReadLine();
                     var values = line.Split(',');
 
                     Login l = new Login();
 
+                    //username and password value positions
                     l.Username = values[1];
                     l.Password = values[2];
 
                     login.Add(l);
                 }
 
+                //loop through all login data in csv 
                 foreach (Login l in login)
                 {
                     //if username and password match csv
@@ -67,18 +70,22 @@ namespace AnimalWatchersUnited2
                         this.Close();
                         break;
                     }
+                    else if (username == null)
+                    {
+                        MessageBox.Show("Please enter a username");
+                        continue;
+                    }
+                    else if (password == null)
+                    {
+                        MessageBox.Show("Please enter a username");
+                        continue;
+                    }
                     else
                     {
-                        MessageBox.Show("Incorrect details, try again");
-                        break;
+                        continue;
                     }
                 }
             }
-        }
-
-        private void ClickRegister(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

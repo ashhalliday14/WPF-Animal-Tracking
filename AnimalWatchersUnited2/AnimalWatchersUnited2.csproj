@@ -55,7 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Sighting.cs" />
+    <Compile Include="Wishlist.cs" />
     <Page Include="AnimalCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Animals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -71,6 +77,9 @@
       <DependentUpon>AnimalCategories.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnimalCategory.cs" />
+    <Compile Include="Animals.xaml.cs">
+      <DependentUpon>Animals.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

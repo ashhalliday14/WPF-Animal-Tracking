@@ -21,7 +21,7 @@
 
         <Rectangle Fill="LightPink" Grid.Row="0" Grid.ColumnSpan="2"/>
         <Label Content="Animal Watchers United" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" FontFamily="Candara" />
-        <Label Content="Please Login or Register to Continue:" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Calibri"  />
+        <Label Content="Please Login to Continue:" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Calibri"  />
         <Border BorderBrush="LightPink" BorderThickness="3" Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="135,0"/>
         <Label Content="Username:" FontSize="19" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Margin="0,17,88,26" FontFamily="Calibri" />
         <Label Content="Password:" FontSize="19" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Margin="0,17,88,26" FontFamily="Calibri" />
@@ -30,7 +30,6 @@
 
         <!--<Button Click="ClickLogin" Content="Login" FontSize="16" Grid.Column="0" Grid.Row="4" Height="30" Width="65" HorizontalAlignment="Right" Margin="0,20,23,20" FontFamily="Calibri"/>-->
         <Button Click="ClickLogin" Content="Login" FontSize="16" Grid.Column="0" Grid.Row="4" Height="30" Width="65" HorizontalAlignment="Right" Margin="0,20,23,20" FontFamily="Calibri" />
-        <Button Click="ClickRegister" Content="Register" FontSize="16" Grid.Column="1" Grid.Row="4" Height="30" Width="65" HorizontalAlignment="Left" Margin="22,20,0,20" FontFamily="Calibri"/>
 
 
     </Grid>

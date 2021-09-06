@@ -48,5 +48,12 @@ namespace AnimalWatchersUnited2
             categories.Show();
             this.Close();
         }
+
+        private void ClickAnimal(object sender, RoutedEventArgs e)
+        {
+            Animals animals = new Animals();
+            animals.Show();
+            this.Close();
+        }
     }
 }

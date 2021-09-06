@@ -11,14 +11,12 @@ namespace AnimalWatchersUnited2
         public string Type { get; set; }
         public string Colour { get; set; }
         public string Origin { get; set; }
-        public int Age { get; set; }
 
         public Animal()
         {
             this.Type = "Not Set";
             this.Colour = "Not Set";
             this.Origin = "Not Set";
-            this.Age = 0;
         }
     }
 }
