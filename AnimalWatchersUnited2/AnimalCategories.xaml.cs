@@ -111,40 +111,41 @@ namespace AnimalWatchersUnited2
             addCategoryPopup.IsOpen = false;
         }
 
+        //delete an animal cateogry
         private void DeleteCategory(object sender, RoutedEventArgs e)
         {
-            ////take user input for animal category
+            //take user input for animal category
             string category = inputCategoryDelete.Text;
+            int columnIndex = 0; //index of the field that contains the categories
+            char separatorChar = ','; //values separated by a ,
 
-            MessageBox.Show(category);
+            var lines = new List<string[]>(); //csv so it has multiple columns
 
-            var lines = new List<string>();
-
+            //read in the file
             using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv"))
             {
-               //var lines = new List<string>();
-               //while (!reader.EndOfStream)
-               // {
-               //     MessageBox.Show("for");
-               //     for (int i = 0; i < lines.Count; i++)
-               //     {
-               //         if (lines[i].StartsWith(category))
-               //         {
-               //             lines.RemoveAt(i);
-               //             MessageBox.Show("Animal Category Deleted");
-               //             break;
-               //         }
-               //         else
-               //         {
-               //             MessageBox.Show("else");
-               //             continue;
-               //         }
-               //     }
-               // }
-
+                
+                while (!reader.EndOfStream)
+                {
+                    lines.Add(reader.ReadLine().Split(separatorChar)); //adding the files content line-by-line and split by the separator character
+                }
             }
-            ////close the popup
-            //MessageBox.Show("clsing popup");
+
+            foreach (var line in lines) //iterate through the lines
+            {
+                if (line[columnIndex] == category) //check category equals what user entered
+                    line[columnIndex] = string.Empty; //delete content if this is true
+            }
+
+            using (var writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv")) //write back to the file
+            {
+                foreach (var item in lines)
+                {
+                    writer.WriteLine(string.Join(separatorChar.ToString(), item)); //convert string[] to string (line)
+                }
+            }
+
+            //close the popup
             addCategoryPopup.IsOpen = false;
 
         }

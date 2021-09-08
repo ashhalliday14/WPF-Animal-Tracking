@@ -59,5 +59,13 @@
             </Grid>
         </Popup>
 
+        <Popup Name="deleteAnimalPopup" IsOpen="False">
+            <Grid Height="150" Width="400" Background="White" >
+                <Label Content="Enter Animal Name To Delete:" Height="28" HorizontalAlignment="Left" Margin="105,22,0,0" Name="label5" VerticalAlignment="Top" />
+                <TextBox x:Name="inputAnimalDelete" Height="23" HorizontalAlignment="Left" Margin="131,55,0,0" VerticalAlignment="Top" Width="120" />
+                <Button Content="Delete Animal" Height="20" Width="100" Margin="141,103,159,27" Click="DeleteCategory"/>
+            </Grid>
+        </Popup>
+
     </Grid>
 </Window>

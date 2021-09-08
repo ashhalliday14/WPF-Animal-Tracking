@@ -160,9 +160,10 @@ namespace AnimalWatchersUnited2
 
         private void btnDeleteData_Click(object sender, RoutedEventArgs e)
         {
-
+            deleteAnimalPopup.IsOpen = true;
         }
 
+        //add a new animal
         private void AddAnimal(object sender, RoutedEventArgs e)
         {
             //take user input for animals
@@ -181,6 +182,54 @@ namespace AnimalWatchersUnited2
 
             //close the popup
             addAnimalPopup.IsOpen = false;
+        }
+
+        //delete an animal
+        private void DeleteCategory(object sender, RoutedEventArgs e)
+        {
+            //take user input for animal 
+            string category = inputAnimalDelete.Text;
+            int columnIndex = 0; //index of the field that contains the animal type
+            char separatorChar = ','; //values separated by a ,
+
+            var lines = new List<string[]>(); //csv so it has multiple columns
+
+            //read in the file
+            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animal.csv"))
+            {
+
+                while (!reader.EndOfStream)
+                {
+                    lines.Add(reader.ReadLine().Split(separatorChar)); //adding the files content line-by-line and split by the separator character
+                }
+            }
+
+            foreach (var line in lines) //iterate through the lines
+            {
+                if (line[columnIndex] == category) //check category equals what user entered
+                {
+                    line[columnIndex] = string.Empty; //delete content if this is true
+                    line[1] = string.Empty;
+                    line[2] = string.Empty;
+                    line[3] = string.Empty;
+                    MessageBox.Show("Animal Deleted!");
+                }
+                else
+                {
+                    MessageBox.Show("Animal could not be deleted.");
+                }
+            }
+
+            using (var writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animal.csv")) //write back to the file
+            {
+                foreach (var item in lines)
+                {
+                    writer.WriteLine(string.Join(separatorChar.ToString(), item)); //convert string[] to string (line)
+                }
+            }
+
+            //close the popup
+            deleteAnimalPopup.IsOpen = false;
         }
     }
 }
