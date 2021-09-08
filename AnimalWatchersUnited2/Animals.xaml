@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AnimalWatchersUnited2"
         mc:Ignorable="d"
         Title="Animals" Height="450" Width="800" >
-    <Grid Loaded="Window_Loaded">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -32,6 +32,32 @@
         <Button Click="ClickLogout" Content="Logout" Grid.Column="5" Grid.Row="1" Height="50px" Width="110px" Margin="10,0,10,50"/>
 
 
-        <DataGrid Name="DataGridViewAnimals" Grid.Row="2" RenderTransformOrigin="0.808,0.668" Grid.ColumnSpan="3" Grid.RowSpan="2" SelectionChanged="DataGridViewAnimals_SelectionChanged" Loaded="Window_Loaded"/>
+        <!--<DataGrid Name="DataGridViewAnimals" Grid.Row="2" RenderTransformOrigin="0.808,0.668" Grid.ColumnSpan="3" Grid.RowSpan="2" SelectionChanged="DataGridViewAnimals_SelectionChanged" Loaded="Window_Loaded"/>-->
+
+        <DockPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Button Name="btnGetData" Content="View Animals" Click="btnGetData_Click"/>
+                <Button Name="btnAddData" Content="Add Animals" Click="btnAddData_Click"/>
+                <Button Name="btnEditData" Content="Edit Animals" Click="btnEditData_Click"/>
+                <Button Name="btnDeleteData" Content="Delete Animals" Click="btnDeleteData_Click"/>
+            </StackPanel>
+            <DataGrid Name="dgAnimas" AutoGenerateColumns="True" DockPanel.Dock="Bottom"/>
+        </DockPanel>
+
+        <Popup Name="addAnimalPopup" IsOpen="False">
+            <Grid Height="220" Width="400" Background="White" >
+                <Label Content="Animal Type:" Height="28" HorizontalAlignment="Left" Margin="39,34,0,0" Name="label1" VerticalAlignment="Top" RenderTransformOrigin="0.527,-0.062" />
+                <TextBox x:Name="inputAnimalType" Height="23" HorizontalAlignment="Left" Margin="162,34,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.962,-0.026" />
+                <Label Content="Category Name:" Height="28" HorizontalAlignment="Left" Margin="39,67,0,0" Name="label2" VerticalAlignment="Top" />
+                <TextBox x:Name="inputAnimalCategory" Height="23" HorizontalAlignment="Left" Margin="162,67,0,0" VerticalAlignment="Top" Width="120" />
+                <Label Content="Animal Colour:" Height="28" HorizontalAlignment="Left" Margin="39,128,0,0" Name="label3" VerticalAlignment="Top" RenderTransformOrigin="0.481,1.179" />
+                <TextBox x:Name="inputAnimalColour" Height="23" HorizontalAlignment="Left" Margin="162,100,0,0" VerticalAlignment="Top" Width="120" />
+                <Label Content="Animal Origin:" Height="28" HorizontalAlignment="Left" Margin="39,95,0,0" Name="label4" VerticalAlignment="Top" />
+                <TextBox x:Name="inputAnimalOrigin" Height="23" HorizontalAlignment="Left" Margin="162,133,0,0" VerticalAlignment="Top" Width="120" />
+                
+                <Button Content="Add Animal" Height="20" Width="100" Margin="151,167,149,13" Click="AddAnimal"/>
+            </Grid>
+        </Popup>
+
     </Grid>
 </Window>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnimalWatchersUnited2"
         mc:Ignorable="d"
-        Title="Homepage" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Homepage" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -32,6 +32,33 @@
         <Button Click="ClickLogout" Content="Logout" Grid.Column="5" Grid.Row="1" Height="50px" Width="110px" Margin="10,0,10,50"/>
 
 
-        <DataGrid Name="DataGridViewAnimalCategories" Grid.Row="2" RenderTransformOrigin="0.808,0.668" Grid.ColumnSpan="2" Grid.RowSpan="2" Loaded="Window_Loaded"/>
+        <!--<DataGrid Name="DataGridViewAnimalCategories" Grid.Row="2" RenderTransformOrigin="0.808,0.668" Grid.ColumnSpan="2" Grid.RowSpan="2" Loaded="Window_Loaded"/>-->
+
+        <DockPanel Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Button Name="btnGetData" Content="View Categories" Click="btnGetData_Click"/>
+                <Button Name="btnAddData" Content="Add Categories" Click="btnAddData_Click"/>
+                <Button Name="btnEditData" Content="Edit Categories" Click="btnEditData_Click"/>
+                <Button Name="btnDeleteData" Content="Delete Categories" Click="btnDeleteData_Click"/>
+            </StackPanel>
+            <DataGrid Name="dgAnimalCategories" AutoGenerateColumns="True" DockPanel.Dock="Bottom"/>
+        </DockPanel>
+
+        <Popup Name="addCategoryPopup" IsOpen="False">
+            <Grid Height="150" Width="400" Background="White" >
+                <Label Content="Category Name:" Height="28" HorizontalAlignment="Left" Margin="39,50,0,0" Name="label1" VerticalAlignment="Top" />
+                <TextBox x:Name="inputCategory" Height="23" HorizontalAlignment="Left" Margin="151,55,0,0" VerticalAlignment="Top" Width="120" />
+                <Button Content="Add Category" Height="20" Width="100" Margin="151,104,149,26" Click="AddCategory"/>
+            </Grid>
+        </Popup>
+
+        <Popup Name="deleteCategoryPopup" IsOpen="False">
+            <Grid Height="150" Width="400" Background="White" >
+                <Label Content="Enter Category Name To Delete:" Height="28" HorizontalAlignment="Left" Margin="105,22,0,0" Name="label2" VerticalAlignment="Top" />
+                <TextBox x:Name="inputCategoryDelete" Height="23" HorizontalAlignment="Left" Margin="131,55,0,0" VerticalAlignment="Top" Width="120" />
+                <Button Content="Delete Category" Height="20" Width="100" Margin="141,103,159,27" Click="DeleteCategory"/>
+            </Grid>
+        </Popup>
+
     </Grid>
 </Window>

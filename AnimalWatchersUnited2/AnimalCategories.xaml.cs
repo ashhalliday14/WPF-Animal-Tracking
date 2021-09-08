@@ -47,63 +47,15 @@ namespace AnimalWatchersUnited2
             this.Close();
         }
 
-        //private void ListViewAnimalCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    //create a login list
-        //    List<AnimalCategory> category = new List<AnimalCategory>();
-        //    using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv"))
-        //    {
-        //        //read the first line of csv as a header
-        //        var header = reader.ReadLine();
+        private void ClickAnimal(object sender, RoutedEventArgs e)
+        {
+            //open up animal page
+            Animals animals = new Animals();
+            animals.Show();
+            this.Close();
+        }
 
-        //        while (!reader.EndOfStream)
-        //        {
-        //            var line = reader.ReadLine();
-        //            var values = line.Split(',');
-
-        //            AnimalCategory c = new AnimalCategory();
-
-        //            c.Id = values[0];
-        //            c.Category = values[1];
-
-        //            category.Add(c);
-        //        }
-        //        foreach (AnimalCategory c in category)
-        //        {
-        //            Console.WriteLine(c.Category);
-        //        }
-        //    }
-        //}
-
-        ////private void DisplayAnimalCategories_Click(object sender, RoutedEventArgs e)
-        ////{
-        ////    //create a login list
-        ////    List<AnimalCategory> category = new List<AnimalCategory>();
-        ////    using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv"))
-        ////    {
-        ////        //read the first line of csv as a header
-        ////        var header = reader.ReadLine();
-
-        ////        while (!reader.EndOfStream)
-        ////        {
-        ////            var line = reader.ReadLine();
-        ////            var values = line.Split(',');
-
-        ////            AnimalCategory c = new AnimalCategory();
-
-        ////            c.Id = values[0];
-        ////            c.Category = values[1];
-
-        ////            category.Add(c);
-        ////        }
-        ////        foreach (AnimalCategory c in category)
-        ////        {
-        ////            MessageBox.Show(c.Category);
-        ////        }
-        ////    }
-        ////}
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        public void btnGetData_Click(object sender, RoutedEventArgs e)
         {
             AnimalCategory animalCategory = new AnimalCategory();
             string[] CategoryArray;
@@ -122,15 +74,79 @@ namespace AnimalWatchersUnited2
                     dt.Rows.Add(CategoryArray);
                 }
                 DataView dv = new DataView(dt);
-                DataGridViewAnimalCategories.ItemsSource = dv;
+                dgAnimalCategories.ItemsSource = dv;
             }
         }
 
-        private void ClickAnimal(object sender, RoutedEventArgs e)
+        //string filepath = @"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv";
+        private void btnAddData_Click(object sender, RoutedEventArgs e)
         {
-            Animals animals = new Animals();
-            animals.Show();
-            this.Close();
+            addCategoryPopup.IsOpen = true;  
+        }
+
+        private void btnEditData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteData_Click(object sender, RoutedEventArgs e)
+        {
+            deleteCategoryPopup.IsOpen = true;
+        }
+
+        //add category popup
+        private void AddCategory(object sender, RoutedEventArgs e)
+        {
+            //take user input for animal category
+            string category = inputCategory.Text;
+
+            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv", true))
+            {
+                //write the input into the csv
+                writer.WriteLine(category);
+
+                MessageBox.Show("Animal Category Added! Click View Animal Category to Display!");
+            }
+            //close the popup
+            addCategoryPopup.IsOpen = false;
+        }
+
+        private void DeleteCategory(object sender, RoutedEventArgs e)
+        {
+            ////take user input for animal category
+            string category = inputCategoryDelete.Text;
+
+            MessageBox.Show(category);
+
+            var lines = new List<string>();
+
+            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv"))
+            {
+               //var lines = new List<string>();
+               //while (!reader.EndOfStream)
+               // {
+               //     MessageBox.Show("for");
+               //     for (int i = 0; i < lines.Count; i++)
+               //     {
+               //         if (lines[i].StartsWith(category))
+               //         {
+               //             lines.RemoveAt(i);
+               //             MessageBox.Show("Animal Category Deleted");
+               //             break;
+               //         }
+               //         else
+               //         {
+               //             MessageBox.Show("else");
+               //             continue;
+               //         }
+               //     }
+               // }
+
+            }
+            ////close the popup
+            //MessageBox.Show("clsing popup");
+            addCategoryPopup.IsOpen = false;
+
         }
     }
 }

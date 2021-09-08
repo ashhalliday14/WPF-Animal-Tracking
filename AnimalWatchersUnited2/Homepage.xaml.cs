@@ -42,6 +42,7 @@ namespace AnimalWatchersUnited2
             this.Close();
         }
 
+        //click animal categories button
         private void ClickAnimalCategories(object sender, RoutedEventArgs e)
         {
             AnimalCategories categories = new AnimalCategories();
