@@ -15,22 +15,13 @@ using System.Windows.Shapes;
 namespace AnimalWatchersUnited2
 {
     /// <summary>
-    /// Interaction logic for Homepage.xaml
+    /// Interaction logic for Sightings.xaml
     /// </summary>
-    public partial class Homepage : Window
+    public partial class Sightings : Window
     {
-        public Homepage()
+        public Sightings()
         {
             InitializeComponent();
-        }
-
-        //click logout button
-        private void ClickLogout(object sender, RoutedEventArgs e)
-        {
-            //close homepage and open login screen
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
         }
 
         //click main menu button
@@ -55,6 +46,15 @@ namespace AnimalWatchersUnited2
         {
             Animals animals = new Animals();
             animals.Show();
+            this.Close();
+        }
+
+        //click logout button
+        private void ClickLogout(object sender, RoutedEventArgs e)
+        {
+            //close homepage and open login screen
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             this.Close();
         }
 

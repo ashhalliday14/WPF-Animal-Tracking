@@ -149,5 +149,13 @@ namespace AnimalWatchersUnited2
             addCategoryPopup.IsOpen = false;
 
         }
+
+        //click sightings button
+        private void ClickSightings(object sender, RoutedEventArgs e)
+        {
+            Sightings sightings = new Sightings();
+            sightings.Show();
+            this.Close();
+        }
     }
 }

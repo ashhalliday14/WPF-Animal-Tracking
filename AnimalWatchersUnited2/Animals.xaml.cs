@@ -26,36 +26,6 @@ namespace AnimalWatchersUnited2
             InitializeComponent();
         }
 
-        //private void DataGridViewAnimals_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-
-        //    Animal animal= new Animal();
-        //    string[] AnimalArray;
-
-        //    DataTable dt = new DataTable();
-        //    dt.Columns.Add("Type", typeof(string));
-        //    dt.Columns.Add("Category", typeof(string));
-        //    dt.Columns.Add("Colour", typeof(string));
-        //    dt.Columns.Add("Origin", typeof(string));
-
-        //    using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animal.csv"))
-        //    {
-        //        while (!reader.EndOfStream)
-        //        {
-        //            AnimalArray = reader.ReadLine().Split(',');
-
-        //            animal.Type = AnimalArray[0];
-        //            animal.Category = AnimalArray[1];
-        //            animal.Colour = AnimalArray[2];
-        //            animal.Origin = AnimalArray[3];
-
-        //            dt.Rows.Add(AnimalArray);
-        //        }
-        //        DataView dv = new DataView(dt);
-        //        DataGridViewAnimals.ItemsSource = dv;
-        //    }
-        //}
-
         //click logout button
         private void ClickLogout(object sender, RoutedEventArgs e)
         {
@@ -82,35 +52,7 @@ namespace AnimalWatchersUnited2
             this.Close();
         }
 
-        //private void Window_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    Animal animal = new Animal();
-        //    string[] AnimalArray;s
-
-        //    DataTable dt = new DataTable();
-        //    dt.Columns.Add("Type", typeof(string));
-        //    dt.Columns.Add("Category", typeof(string));
-        //    dt.Columns.Add("Colour", typeof(string));
-        //    dt.Columns.Add("Origin", typeof(string));
-
-        //    using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animal.csv"))
-        //    {
-        //        while (!reader.EndOfStream)
-        //        {
-        //            AnimalArray = reader.ReadLine().Split(',');
-
-        //            animal.Type = AnimalArray[0];
-        //            animal.Category = AnimalArray[1];
-        //            animal.Colour = AnimalArray[2];
-        //            animal.Origin = AnimalArray[3];
-
-        //            dt.Rows.Add(AnimalArray);
-        //        }
-        //        DataView dv = new DataView(dt);
-        //        DataGridViewAnimals.ItemsSource = dv;
-        //    }
-        //}
-
+        //click animal button
         private void ClickAnimal(object sender, RoutedEventArgs e)
         {
             Animals animals = new Animals();
@@ -148,8 +90,10 @@ namespace AnimalWatchersUnited2
             }
         }
 
+        //user clicks add animal button
         private void btnAddData_Click(object sender, RoutedEventArgs e)
         {
+            //direct user to popup
             addAnimalPopup.IsOpen = true;
         }
 
@@ -158,8 +102,10 @@ namespace AnimalWatchersUnited2
 
         }
 
+        //user clicks delete animal button
         private void btnDeleteData_Click(object sender, RoutedEventArgs e)
         {
+            //direct user to popup
             deleteAnimalPopup.IsOpen = true;
         }
 
@@ -230,6 +176,14 @@ namespace AnimalWatchersUnited2
 
             //close the popup
             deleteAnimalPopup.IsOpen = false;
+        }
+
+        //click sightings button
+        private void ClickSightings(object sender, RoutedEventArgs e)
+        {
+            Sightings sightings = new Sightings();
+            sightings.Show();
+            this.Close();
         }
     }
 }
