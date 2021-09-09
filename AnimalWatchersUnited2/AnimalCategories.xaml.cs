@@ -47,6 +47,7 @@ namespace AnimalWatchersUnited2
             this.Close();
         }
 
+        //click animals button
         private void ClickAnimal(object sender, RoutedEventArgs e)
         {
             //open up animal page
@@ -78,17 +79,19 @@ namespace AnimalWatchersUnited2
             }
         }
 
-        //string filepath = @"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv";
+        //click add category
         private void btnAddData_Click(object sender, RoutedEventArgs e)
         {
             addCategoryPopup.IsOpen = true;  
         }
 
+        //click edit category
         private void btnEditData_Click(object sender, RoutedEventArgs e)
         {
-
+            editCategoryPopup.IsOpen = true;
         }
 
+        //click delete category
         private void btnDeleteData_Click(object sender, RoutedEventArgs e)
         {
             deleteCategoryPopup.IsOpen = true;
@@ -111,7 +114,7 @@ namespace AnimalWatchersUnited2
             addCategoryPopup.IsOpen = false;
         }
 
-        //delete an animal cateogry
+        //delete an animal cateogry popup
         private void DeleteCategory(object sender, RoutedEventArgs e)
         {
             //take user input for animal category
@@ -164,6 +167,45 @@ namespace AnimalWatchersUnited2
             Wishlists wishlist = new Wishlists();
             wishlist.Show();
             this.Close();
+        }
+
+        //edit category popup
+        private void EditCategory(object sender, RoutedEventArgs e)
+        {
+            //take user input for existing and edited category
+            string oldCategory = inputEditCategory.Text;
+            string newCategory = inputNewCategory.Text;
+
+            List<String> lines = new List<String>(); //create a new list
+
+            //read in csv file
+            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv"))
+            {
+                String line;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    for(int i = 0; i < lines.Count; i++)
+                    {
+                        String[] split = line.Split(','); //split lines with comma
+
+                        if (split[0].Contains(oldCategory)) //chck line contains category entered
+                        {
+                            split[0] = newCategory;
+                            line = String.Join(",", split);
+                        }
+                    }
+
+                    lines.Add(line); //add new category to list
+                }
+            }
+            //write to csv
+            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv", false))
+            {
+                foreach (String line in lines)
+                    writer.WriteLine(line); //write the new category to the csv file
+            }
+            editCategoryPopup.IsOpen = false;
         }
     }
 }

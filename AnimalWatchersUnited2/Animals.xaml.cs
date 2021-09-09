@@ -193,5 +193,40 @@ namespace AnimalWatchersUnited2
             wishlist.Show();
             this.Close();
         }
+
+        //edit animal popup
+        private void EditCategory(object sender, RoutedEventArgs e)
+        {
+            //get user input
+            string oldAnimal = inputEditAnimal.Text;
+            string newAnimal = inputNewAnimal.Text;
+            string category = inputNewCategory.Text;
+            string colour = inputNewColour.Text;
+            string origin = inputNewOrigin.Text;
+
+            List<String> lines = new List<String>(); //create a new list
+
+            //read in csv file
+            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animal.csv"))
+            {
+                String line;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    for (int i = 0; i < lines.Count; i++)
+                    {
+                        String[] split = line.Split(','); //split lines with comma
+
+                        if (split[0].Contains(oldAnimal, category, colour, origin)) //chck line contains animal entered
+                        {
+                            split[0] = newAnimal;
+                            line = String.Join(",", split);
+                        }
+                    }
+
+                    lines.Add(line); //add new category to list
+                }
+            }
+        }
     }
 }

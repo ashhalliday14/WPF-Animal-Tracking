@@ -60,5 +60,15 @@
             </Grid>
         </Popup>
 
+        <Popup Name="editCategoryPopup" IsOpen="False">
+            <Grid Height="300" Width="400" Background="White" >
+                <Label Content="Enter Category Name To Edit:" Height="28" HorizontalAlignment="Left" Margin="105,22,0,0" Name="label3" VerticalAlignment="Top" />
+                <TextBox x:Name="inputEditCategory" Height="23" HorizontalAlignment="Left" Margin="131,55,0,0" VerticalAlignment="Top" Width="120" />
+                <Label Content="Enter New Category Name:" Height="28" HorizontalAlignment="Left" Name="label4" VerticalAlignment="Top" Margin="117,102,0,0"/>
+                <TextBox x:Name="inputNewCategory" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="131,150,0,0" />
+                <Button Content="Edit Category" Height="20" Width="100" Margin="141,192,159,88" Click="EditCategory" RenderTransformOrigin="0.493,1.136"/>
+            </Grid>
+        </Popup>
+
     </Grid>
 </Window>

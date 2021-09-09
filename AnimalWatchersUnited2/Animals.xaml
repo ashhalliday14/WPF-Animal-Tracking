@@ -67,5 +67,21 @@
             </Grid>
         </Popup>
 
+        <Popup Name="editCategoryPopup" IsOpen="False">
+            <Grid Height="500" Width="400" Background="White" >
+                <Label Content="Enter Animal Type:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label6" VerticalAlignment="Top" RenderTransformOrigin="0.94,0.101" />
+                <TextBox x:Name="inputEditAnimal" Height="23" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="120" />
+                <Label Content="Enter New Animal Type:" Height="28" HorizontalAlignment="Left" Name="label7" VerticalAlignment="Top" Margin="10,64,0,0"/>
+                <TextBox x:Name="inputNewAnimal" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,64,0,0" />
+                <Label Content="Enter New Animal Category:" Height="28" HorizontalAlignment="Left" Name="label8" VerticalAlignment="Top" Margin="10,118,0,0"/>
+                <TextBox x:Name="inputNewCategory" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,118,0,0"  />
+                <Label Content="Enter New Animal Colour:" Height="28" HorizontalAlignment="Left" Name="label9" VerticalAlignment="Top" Margin="10,165,0,0"/>
+                <TextBox x:Name="inputNewColour" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,170,0,0"   />
+                <Label Content="Enter New Animal Origin:" Height="28" HorizontalAlignment="Left" Name="label10" VerticalAlignment="Top" Margin="13,208,0,0" />
+                <TextBox x:Name="inputNewOrigin" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,213,0,0"   />
+                <Button Content="Edit Animal" Height="20" Width="100" Margin="141,192,159,88" Click="EditCategory" RenderTransformOrigin="0.493,1.136"/>
+            </Grid>
+        </Popup>
+
     </Grid>
 </Window>

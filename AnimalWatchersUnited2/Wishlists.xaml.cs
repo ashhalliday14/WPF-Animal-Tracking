@@ -23,5 +23,56 @@ namespace AnimalWatchersUnited2
         {
             InitializeComponent();
         }
+
+        //click logout button
+        private void ClickLogout(object sender, RoutedEventArgs e)
+        {
+            //close homepage and open login screen
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
+        //click main menu button
+        private void ClickMainMenu(object sender, RoutedEventArgs e)
+        {
+            //return user to homepage/main menu
+            Homepage homepage = new Homepage();
+            homepage.Show();
+            this.Close();
+        }
+
+        //click animals button
+        private void ClickAnimal(object sender, RoutedEventArgs e)
+        {
+            //open up animal page
+            Animals animals = new Animals();
+            animals.Show();
+            this.Close();
+        }
+
+        //click sightings button
+        private void ClickSightings(object sender, RoutedEventArgs e)
+        {
+            Sightings sightings = new Sightings();
+            sightings.Show();
+            this.Close();
+        }
+
+        //click wishlists button
+        private void ClickWishlists(object sender, RoutedEventArgs e)
+        {
+            Wishlists wishlist = new Wishlists();
+            wishlist.Show();
+            this.Close();
+        }
+
+        //click animal categories button
+        private void ClickAnimalCategories(object sender, RoutedEventArgs e)
+        {
+            AnimalCategories categories = new AnimalCategories();
+            categories.Show();
+            this.Close();
+        }
     }
 }
