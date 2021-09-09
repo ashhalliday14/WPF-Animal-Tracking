@@ -27,6 +27,9 @@ namespace AnimalWatchersUnited2
             InitializeComponent();
         }
 
+        //filepath for login file
+        string filepath = @"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\login.csv";
+
         //user clicks login
         private void ClickLogin(object sender, RoutedEventArgs e)
         {
@@ -38,7 +41,7 @@ namespace AnimalWatchersUnited2
             List<Login> login = new List<Login>();
 
             //pull in the login csv file
-            using(StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\login.csv"))
+            using(StreamReader reader = new StreamReader(filepath))
             {
                 //read the first line of csv as a header
                 var header = reader.ReadLine();
@@ -55,7 +58,7 @@ namespace AnimalWatchersUnited2
                     l.Username = values[1];
                     l.Password = values[2];
 
-                    login.Add(l);
+                    login.Add(l); //add data to the list
                 }
 
                 //loop through all login data in csv 

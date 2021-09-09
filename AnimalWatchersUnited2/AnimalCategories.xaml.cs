@@ -29,6 +29,9 @@ namespace AnimalWatchersUnited2
             InitializeComponent();
         }
 
+        //filepath for animal categories csv
+        string filepath = @"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv";
+
         //click logout button
         private void ClickLogout(object sender, RoutedEventArgs e)
         {
@@ -56,45 +59,68 @@ namespace AnimalWatchersUnited2
             this.Close();
         }
 
-        public void btnGetData_Click(object sender, RoutedEventArgs e)
+        //click sightings button
+        private void ClickSightings(object sender, RoutedEventArgs e)
         {
-            AnimalCategory animalCategory = new AnimalCategory();
-            string[] CategoryArray;
+            //open up the sightings page
+            Sightings sightings = new Sightings();
+            sightings.Show();
+            this.Close();
+        }
 
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Animal Category", typeof(string));
-
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv"))
-            {
-                while (!reader.EndOfStream)
-                {
-                    CategoryArray = reader.ReadLine().Split(',');
-
-                    animalCategory.Category = CategoryArray[0];
-
-                    dt.Rows.Add(CategoryArray);
-                }
-                DataView dv = new DataView(dt);
-                dgAnimalCategories.ItemsSource = dv;
-            }
+        //click wishlists button
+        private void ClickWishlists(object sender, RoutedEventArgs e)
+        {
+            //open up the wishlist page
+            Wishlists wishlist = new Wishlists();
+            wishlist.Show();
+            this.Close();
         }
 
         //click add category
         private void btnAddData_Click(object sender, RoutedEventArgs e)
         {
-            addCategoryPopup.IsOpen = true;  
+            //display the add category popup
+            addCategoryPopup.IsOpen = true;
         }
 
         //click edit category
         private void btnEditData_Click(object sender, RoutedEventArgs e)
         {
+            //display the adit category popup
             editCategoryPopup.IsOpen = true;
         }
 
         //click delete category
         private void btnDeleteData_Click(object sender, RoutedEventArgs e)
         {
+            //display delete category popup
             deleteCategoryPopup.IsOpen = true;
+        }
+
+        //user clicks on view categories
+        public void btnGetData_Click(object sender, RoutedEventArgs e)
+        {
+            AnimalCategory animalCategory = new AnimalCategory(); //create new instance of animal category
+            string[] CategoryArray; //create a category array
+
+            DataTable dt = new DataTable(); //instance of the datatable
+            dt.Columns.Add("Animal Category", typeof(string)); //add a header in the datatable
+
+            //read in the animal category csv file
+            using (StreamReader reader = new StreamReader(filepath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    CategoryArray = reader.ReadLine().Split(','); //split the data by commas
+
+                    animalCategory.Category = CategoryArray[0]; //animal category is in position 0
+
+                    dt.Rows.Add(CategoryArray); //add data to the category array
+                }
+                DataView dv = new DataView(dt); //fill data table with data from array
+                dgAnimalCategories.ItemsSource = dv; //display the data in the data table
+            }
         }
 
         //add category popup
@@ -103,7 +129,8 @@ namespace AnimalWatchersUnited2
             //take user input for animal category
             string category = inputCategory.Text;
 
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv", true))
+            //read in the animal category csv file and allow user to write to it
+            using (StreamWriter writer = new StreamWriter(filepath, true))
             {
                 //write the input into the csv
                 writer.WriteLine(category);
@@ -120,14 +147,13 @@ namespace AnimalWatchersUnited2
             //take user input for animal category
             string category = inputCategoryDelete.Text;
             int columnIndex = 0; //index of the field that contains the categories
-            char separatorChar = ','; //values separated by a ,
+            char separatorChar = ','; //values separated by a comma
 
-            var lines = new List<string[]>(); //csv so it has multiple columns
+            var lines = new List<string[]>(); //create a new list
 
-            //read in the file
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv"))
-            {
-                
+            //read in the animal categories file
+            using (StreamReader reader = new StreamReader(filepath))
+            {         
                 while (!reader.EndOfStream)
                 {
                     lines.Add(reader.ReadLine().Split(separatorChar)); //adding the files content line-by-line and split by the separator character
@@ -140,33 +166,15 @@ namespace AnimalWatchersUnited2
                     line[columnIndex] = string.Empty; //delete content if this is true
             }
 
-            using (var writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv")) //write back to the file
+            using (var writer = new StreamWriter(filepath)) //write back to the file
             {
                 foreach (var item in lines)
                 {
                     writer.WriteLine(string.Join(separatorChar.ToString(), item)); //convert string[] to string (line)
                 }
             }
-
             //close the popup
             addCategoryPopup.IsOpen = false;
-
-        }
-
-        //click sightings button
-        private void ClickSightings(object sender, RoutedEventArgs e)
-        {
-            Sightings sightings = new Sightings();
-            sightings.Show();
-            this.Close();
-        }
-
-        //click wishlists button
-        private void ClickWishlists(object sender, RoutedEventArgs e)
-        {
-            Wishlists wishlist = new Wishlists();
-            wishlist.Show();
-            this.Close();
         }
 
         //edit category popup
@@ -179,29 +187,30 @@ namespace AnimalWatchersUnited2
             List<String> lines = new List<String>(); //create a new list
 
             //read in csv file
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv"))
+            using (StreamReader reader = new StreamReader(filepath))
             {
                 String line;
 
-                while ((line = reader.ReadLine()) != null)
+                while ((line = reader.ReadLine()) != null) //check like is not null
                 {
                     String[] split = line.Split(','); //split lines with comma
 
                     if (split[0].Contains(oldCategory)) //chck line contains category entered
                     {
-                        split[0] = newCategory;
-                        line = String.Join(",", split);
+                        split[0] = newCategory; //category is in position 0
+                        line = String.Join(",", split); //split with a comma
                     }
 
                     lines.Add(line); //add new category to list
                 }
             }
             //write to csv
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animalcategory.csv", false))
+            using (StreamWriter writer = new StreamWriter(filepath, false))
             {
                 foreach (String line in lines)
                     writer.WriteLine(line); //write the new category to the csv file
             }
+            //close the edit category popup
             editCategoryPopup.IsOpen = false;
         }
     }

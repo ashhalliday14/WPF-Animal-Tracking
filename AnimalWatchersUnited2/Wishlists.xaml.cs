@@ -26,6 +26,9 @@ namespace AnimalWatchersUnited2
             InitializeComponent();
         }
 
+        //filepath for wishlists folder
+        string filepath = @"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\wishlists.csv";
+
         //click logout button
         private void ClickLogout(object sender, RoutedEventArgs e)
         {
@@ -56,6 +59,7 @@ namespace AnimalWatchersUnited2
         //click sightings button
         private void ClickSightings(object sender, RoutedEventArgs e)
         {
+            //open up sightings page
             Sightings sightings = new Sightings();
             sightings.Show();
             this.Close();
@@ -64,6 +68,7 @@ namespace AnimalWatchersUnited2
         //click wishlists button
         private void ClickWishlists(object sender, RoutedEventArgs e)
         {
+            //open up wishlists page
             Wishlists wishlist = new Wishlists();
             wishlist.Show();
             this.Close();
@@ -72,6 +77,7 @@ namespace AnimalWatchersUnited2
         //click animal categories button
         private void ClickAnimalCategories(object sender, RoutedEventArgs e)
         {
+            //open animal categories page
             AnimalCategories categories = new AnimalCategories();
             categories.Show();
             this.Close();
@@ -80,60 +86,8 @@ namespace AnimalWatchersUnited2
         //user clicks view wishlist
         private void btnGetData_Click(object sender, RoutedEventArgs e)
         {
+            //display the view wishlist popup
             EnterUsernamePopup.IsOpen = true;
-        }
-
-        private void ViewSightings(object sender, RoutedEventArgs e)
-        {
-            string username = inputUsername.Text;
-
-            Wishlist wishlist = new Wishlist();
-            string[] WishlistArray;
-            var wishlists = new List<string[]>();
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("User", typeof(string));
-            dt.Columns.Add("Type", typeof(string));
-            dt.Columns.Add("Category", typeof(string));
-            dt.Columns.Add("Colour", typeof(string));
-            dt.Columns.Add("Size", typeof(string));
-            dt.Columns.Add("Sex", typeof(string));
-
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\wishlists.csv"))
-            {
-                while (!reader.EndOfStream)
-                {
-                    WishlistArray = reader.ReadLine().Split(',');
-
-                    foreach (var wish in wishlists)
-                    {
-                        if (wishlist.Username == username)
-                        {
-                            MessageBox.Show(wishlist.Username);
-                            wishlist.Username = WishlistArray[0];
-                            wishlist.Type = WishlistArray[1];
-                            wishlist.Category = WishlistArray[2];
-                            wishlist.Colour = WishlistArray[3];
-                            wishlist.Size = WishlistArray[4];
-                            wishlist.Sex = WishlistArray[5];
-                            continue;
-                        }
-                        else
-                        {
-                            MessageBox.Show("No Wishlist for this User");
-                        }
-                    }
-
-                    dgWishlists.Columns.Count();
-                    WishlistArray.Count();
-
-                    dt.Rows.Add(WishlistArray);
-
-                    DataView dv = new DataView(dt);
-                    dgWishlists.ItemsSource = dv;
-                }
-                EnterUsernamePopup.IsOpen = false;
-            }
         }
 
         //user clicks on add wishlist button
@@ -150,9 +104,66 @@ namespace AnimalWatchersUnited2
             editWishlistPopup.IsOpen = true;
         }
 
+        //user clicks delete wishlist button
         private void btnDeleteData_Click(object sender, RoutedEventArgs e)
         {
+            //open delete wishlist popup
             deleteWishlistPopup.IsOpen = true;
+        }
+
+        //user clicks view sightings
+        private void ViewSightings(object sender, RoutedEventArgs e)
+        {
+            //take user input for their username
+            string username = inputUsername.Text;
+
+            Wishlist wishlist = new Wishlist(); //create new instance of wishlist
+            string[] WishlistArray; //create wishlist array
+            var wishlists = new List<string[]>(); //create list
+
+            DataTable dt = new DataTable(); //new instance of datatable
+            //add column headers to the datatable for wishlist 
+            dt.Columns.Add("User", typeof(string));
+            dt.Columns.Add("Type", typeof(string));
+            dt.Columns.Add("Category", typeof(string));
+            dt.Columns.Add("Colour", typeof(string));
+            dt.Columns.Add("Size", typeof(string));
+            dt.Columns.Add("Sex", typeof(string));
+
+            //read in the wishlists file
+            using (StreamReader reader = new StreamReader(filepath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    WishlistArray = reader.ReadLine().Split(','); //split with a comma
+
+                    foreach (var wish in wishlists) //iterate through lines
+                    {
+                        if (wishlist.Username == username) //check line starts with username that matches what user entered
+                        {
+                            //position of all data in array
+                            wishlist.Username = WishlistArray[0];
+                            wishlist.Type = WishlistArray[1];
+                            wishlist.Category = WishlistArray[2];
+                            wishlist.Colour = WishlistArray[3];
+                            wishlist.Size = WishlistArray[4];
+                            wishlist.Sex = WishlistArray[5];
+                            continue;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No Wishlist for this User");
+                        }
+                    }
+
+                    dt.Rows.Add(WishlistArray); //add data to wishlist array
+
+                    DataView dv = new DataView(dt); //input data into datatable
+                    dgWishlists.ItemsSource = dv; //display data in datatable
+                }
+                //close the popup
+                EnterUsernamePopup.IsOpen = false;
+            }
         }
 
         //add wishlist popup
@@ -167,14 +178,13 @@ namespace AnimalWatchersUnited2
             string sex = inputSex.Text;
 
             //allow details to be input into csv file
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\wishlists.csv", true))
+            using (StreamWriter writer = new StreamWriter(filepath, true))
             {
                 //write the input into the csv
                 writer.WriteLine("{0},{1},{2},{3},{4},{5}", user, animal, category, colour, size, sex.ToString());
 
                 MessageBox.Show("Wishlist Added! Click View Signtings to Display!");
             }
-
             //close the popup
             addWishlistPopup.IsOpen = false;
         }
@@ -194,17 +204,17 @@ namespace AnimalWatchersUnited2
             List<String> lines = new List<String>(); //create a new list
 
             //read in csv file
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\wishlists.csv"))
+            using (StreamReader reader = new StreamReader(filepath))
             {
                 String line;
 
-                while ((line = reader.ReadLine()) != null)
+                while ((line = reader.ReadLine()) != null) //check line is not null
                 {
                     String[] split = line.Split(','); //split lines with comma
 
-                    if (split[0].Contains(username)) //check line contains animal entered
+                    if (split[0].Contains(username)) //check line contains username entered
                     {
-                        if (split[1].Contains(oldAnimal))
+                        if (split[1].Contains(oldAnimal)) //check line also contains animal entered
                         {
                             //add new wishlist details
                             split[0] = username;
@@ -213,38 +223,38 @@ namespace AnimalWatchersUnited2
                             split[3] = colour;
                             split[4] = size;
                             split[5] = sex;
-                            line = String.Join(",", split);
+                            line = String.Join(",", split); //split with a comma
                         }
                     }
-
                     lines.Add(line); //add new animal to list
                 }
             }
             //write to csv
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\wishlists.csv", false))
+            using (StreamWriter writer = new StreamWriter(filepath, false))
             {
-                foreach (String line in lines)
+                foreach (String line in lines) //iterate through lines
                 {
                     writer.WriteLine(line); //write the new sighting to the csv file
                 }
 
             }
+            //close edit wishlist popup
             editWishlistPopup.IsOpen = false;
         }
 
+        //user clicks delete wishlist
         private void DeleteWishlist(object sender, RoutedEventArgs e)
         {
             //take user input for animal 
             string animal = inputAnimalDelete.Text;
             int columnIndex = 1; //index of the field that contains the animal type
-            char separatorChar = ','; //values separated by a ,
+            char separatorChar = ','; //values separated by a comma
 
-            var lines = new List<string[]>(); //csv so it has multiple columns
+            var lines = new List<string[]>(); //create a list
 
             //read in the file
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\wishlists.csv"))
+            using (StreamReader reader = new StreamReader(filepath))
             {
-
                 while (!reader.EndOfStream)
                 {
                     lines.Add(reader.ReadLine().Split(separatorChar)); //adding the files content line-by-line and split by the separator character
@@ -253,7 +263,7 @@ namespace AnimalWatchersUnited2
 
             foreach (var line in lines) //iterate through the lines
             {
-                if (line[columnIndex] == animal) //check category equals what user entered
+                if (line[columnIndex] == animal) //check animal equals what user entered
                 {
                     line[columnIndex] = string.Empty; //delete content if this is true
                     line[0] = string.Empty;
@@ -268,15 +278,14 @@ namespace AnimalWatchersUnited2
                     MessageBox.Show("Animal could not be deleted.");
                 }
             }
-
-            using (var writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\wishlists.csv")) //write back to the file
+            //write back to file
+            using (var writer = new StreamWriter(filepath)) 
             {
                 foreach (var item in lines)
                 {
                     writer.WriteLine(string.Join(separatorChar.ToString(), item)); //convert string[] to string (line)
                 }
             }
-
             //close the popup
             deleteWishlistPopup.IsOpen = false;
         }

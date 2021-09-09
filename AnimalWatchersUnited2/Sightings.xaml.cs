@@ -26,6 +26,9 @@ namespace AnimalWatchersUnited2
             InitializeComponent();
         }
 
+        //filepath for sightings file
+        string filepath = @"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\sightings.csv";
+
         //click main menu button
         private void ClickMainMenu(object sender, RoutedEventArgs e)
         {
@@ -38,6 +41,7 @@ namespace AnimalWatchersUnited2
         //click animal categories button
         private void ClickAnimalCategories(object sender, RoutedEventArgs e)
         {
+            //open up animal categories page
             AnimalCategories categories = new AnimalCategories();
             categories.Show();
             this.Close();
@@ -46,6 +50,7 @@ namespace AnimalWatchersUnited2
         //click animal button
         private void ClickAnimal(object sender, RoutedEventArgs e)
         {
+            //open up animals page
             Animals animals = new Animals();
             animals.Show();
             this.Close();
@@ -63,66 +68,19 @@ namespace AnimalWatchersUnited2
         //click sightings button
         private void ClickSightings(object sender, RoutedEventArgs e)
         {
+            //open up sightings page
             Sightings sightings = new Sightings();
             sightings.Show();
             this.Close();
         }
 
-        private void ViewSightings(object sender, RoutedEventArgs e)
+        //click wishlist button
+        private void ClickWishlists(object sender, RoutedEventArgs e)
         {
-            string username = inputUsername.Text;
-
-            Sighting sighting = new Sighting();
-            string[] SightingArray;
-            var sightings = new List<string[]>();
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("User", typeof(string));
-            dt.Columns.Add("Type", typeof(string));
-            dt.Columns.Add("Category", typeof(string));
-            dt.Columns.Add("Colour", typeof(string));
-            dt.Columns.Add("Origin", typeof(string));
-            dt.Columns.Add("Location", typeof(string));
-            dt.Columns.Add("Size", typeof(string));
-            dt.Columns.Add("Sex", typeof(string));
-
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\sightings.csv"))
-            {
-                while (!reader.EndOfStream)
-                {
-                    SightingArray = reader.ReadLine().Split(',');
-
-                    foreach (var sight in sightings)
-                    {
-                        if (sighting.Username == username)
-                        {
-                            MessageBox.Show(sighting.Username);
-                            sighting.Username = SightingArray[0];
-                            sighting.Type = SightingArray[1];
-                            sighting.Category = SightingArray[2];
-                            sighting.Colour = SightingArray[3];
-                            sighting.Origin = SightingArray[4];
-                            sighting.SightingLocation = SightingArray[5];
-                            sighting.Size = SightingArray[6];
-                            sighting.Sex = SightingArray[7];
-                            continue;
-                        }
-                        else
-                        {
-                            MessageBox.Show("No Sightings for this User");
-                        }
-                    }
-
-                    dgSightings.Columns.Count();
-                    SightingArray.Count();
-
-                    dt.Rows.Add(SightingArray);
-
-                    DataView dv = new DataView(dt);
-                    dgSightings.ItemsSource = dv;
-                }
-                EnterUsernamePopup.IsOpen = false;
-            }
+            //open up wishlists page
+            Wishlists wishlist = new Wishlists();
+            wishlist.Show();
+            this.Close();
         }
 
         //user clicks view sightings
@@ -146,17 +104,69 @@ namespace AnimalWatchersUnited2
             editSightingPopup.IsOpen = true;
         }
 
+        //user clicks delete a sighting
         private void btnDeleteData_Click(object sender, RoutedEventArgs e)
         {
+            //display the delete sighting popup
             deleteSightingPopup.IsOpen = true;
         }
 
-        //click wishlist button
-        private void ClickWishlists(object sender, RoutedEventArgs e)
+        //user clicks on view sightings button
+        private void ViewSightings(object sender, RoutedEventArgs e)
         {
-            Wishlists wishlist = new Wishlists();
-            wishlist.Show();
-            this.Close();
+            //take user input for their username to display personal sightings
+            string username = inputUsername.Text;
+
+            Sighting sighting = new Sighting(); //create a new instance of sighting
+            string[] SightingArray; //create a sighting array
+            var sightings = new List<string[]>(); //create a list
+
+            DataTable dt = new DataTable(); //create instance of data table
+            //add column headers to the datatable for sighting information
+            dt.Columns.Add("User", typeof(string));
+            dt.Columns.Add("Type", typeof(string));
+            dt.Columns.Add("Category", typeof(string));
+            dt.Columns.Add("Colour", typeof(string));
+            dt.Columns.Add("Origin", typeof(string));
+            dt.Columns.Add("Location", typeof(string));
+            dt.Columns.Add("Size", typeof(string));
+            dt.Columns.Add("Sex", typeof(string));
+
+            using (StreamReader reader = new StreamReader(filepath)) //read in the sightings csv
+            {
+                while (!reader.EndOfStream)
+                {
+                    SightingArray = reader.ReadLine().Split(','); //split lines with a comma
+
+                    foreach (var sight in sightings) //iterate through all lines
+                    {
+                        if (sighting.Username == username) //check that username entered matches the username in username row
+                        {
+                            //position of all data in the array
+                            sighting.Username = SightingArray[0];
+                            sighting.Type = SightingArray[1];
+                            sighting.Category = SightingArray[2];
+                            sighting.Colour = SightingArray[3];
+                            sighting.Origin = SightingArray[4];
+                            sighting.SightingLocation = SightingArray[5];
+                            sighting.Size = SightingArray[6];
+                            sighting.Sex = SightingArray[7];
+                            continue;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No Sightings for this User");
+                        }
+                    }
+
+                    dt.Rows.Add(SightingArray); //add all data to the array
+
+                    DataView dv = new DataView(dt); //add data into the datatable
+                    dgSightings.ItemsSource = dv; //display all data in the datatable
+                }
+                //close the popup
+                EnterUsernamePopup.IsOpen = false;
+            }
         }
 
         //add a new sighting button
@@ -173,18 +183,18 @@ namespace AnimalWatchersUnited2
             string sex = inputSex.Text;
 
             //allow details to be input into csv file
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\sightings.csv", true))
+            using (StreamWriter writer = new StreamWriter(filepath, true))
             {
                 //write the input into the csv
                 writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7}", user, animal, category, colour, origin, location, size, sex.ToString());
 
                 MessageBox.Show("Signting Added! Click View Signtings to Display!");
             }
-
             //close the popup
             addSightingPopup.IsOpen = false;
         }
 
+        //user clicks edit sighting button
         private void EditSighting(object sender, RoutedEventArgs e)
         {
             //get user input
@@ -201,17 +211,17 @@ namespace AnimalWatchersUnited2
             List<String> lines = new List<String>(); //create a new list
 
             //read in csv file
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\sightings.csv"))
+            using (StreamReader reader = new StreamReader(filepath))
             {
                 String line;
 
-                while ((line = reader.ReadLine()) != null)
+                while ((line = reader.ReadLine()) != null) //check lines are not null
                 {
                     String[] split = line.Split(','); //split lines with comma
 
                     if (split[0].Contains(username)) //check line contains animal entered
                     {
-                        if (split[1].Contains(oldAnimal))
+                        if (split[1].Contains(oldAnimal)) //check that the line contains animal user has entered
                         {
                             //add new animal details
                             split[0] = username;
@@ -225,12 +235,11 @@ namespace AnimalWatchersUnited2
                             line = String.Join(",", split);
                         }  
                     }
-
                     lines.Add(line); //add new animal to list
                 }
             }
             //write to csv
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\sightings.csv", false))
+            using (StreamWriter writer = new StreamWriter(filepath, false))
             {
                 foreach (String line in lines)
                 {
@@ -238,9 +247,11 @@ namespace AnimalWatchersUnited2
                 }
 
             }
+            //close the edit sighting popup
             editSightingPopup.IsOpen = false;
         }
 
+        //user clicks delete sighting button
         private void DeleteSighting(object sender, RoutedEventArgs e)
         {
             //take user input for animal 
@@ -248,10 +259,10 @@ namespace AnimalWatchersUnited2
             int columnIndex = 1; //index of the field that contains the animal type
             char separatorChar = ','; //values separated by a ,
 
-            var lines = new List<string[]>(); //csv so it has multiple columns
+            var lines = new List<string[]>(); //create a list
 
             //read in the file
-            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\sightings.csv"))
+            using (StreamReader reader = new StreamReader(filepath))
             {
 
                 while (!reader.EndOfStream)
@@ -262,7 +273,7 @@ namespace AnimalWatchersUnited2
 
             foreach (var line in lines) //iterate through the lines
             {
-                if (line[columnIndex] == animal) //check category equals what user entered
+                if (line[columnIndex] == animal) //check animal equals what user entered
                 {
                     line[columnIndex] = string.Empty; //delete content if this is true
                     line[0] = string.Empty;
@@ -279,15 +290,14 @@ namespace AnimalWatchersUnited2
                     MessageBox.Show("Animal could not be deleted.");
                 }
             }
-
-            using (var writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\sightings.csv")) //write back to the file
+            //write back to the file
+            using (var writer = new StreamWriter(filepath)) 
             {
-                foreach (var item in lines)
+                foreach (var item in lines) //iterate through lines
                 {
                     writer.WriteLine(string.Join(separatorChar.ToString(), item)); //convert string[] to string (line)
                 }
             }
-
             //close the popup
             deleteSightingPopup.IsOpen = false;
         }

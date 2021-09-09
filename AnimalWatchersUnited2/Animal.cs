@@ -12,6 +12,7 @@ namespace AnimalWatchersUnited2
         public string Colour { get; set; }
         public string Origin { get; set; }
 
+        //animal constructor
         public Animal()
         {
             this.Type = "Not Set";
