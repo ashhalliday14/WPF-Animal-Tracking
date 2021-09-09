@@ -157,5 +157,13 @@ namespace AnimalWatchersUnited2
             sightings.Show();
             this.Close();
         }
+
+        //click wishlists button
+        private void ClickWishlists(object sender, RoutedEventArgs e)
+        {
+            Wishlists wishlist = new Wishlists();
+            wishlist.Show();
+            this.Close();
+        }
     }
 }

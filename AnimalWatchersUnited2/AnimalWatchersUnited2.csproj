@@ -60,6 +60,9 @@
       <DependentUpon>Sightings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wishlist.cs" />
+    <Compile Include="Wishlists.xaml.cs">
+      <DependentUpon>Wishlists.xaml</DependentUpon>
+    </Compile>
     <Page Include="AnimalCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,6 +99,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Sightings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wishlists.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

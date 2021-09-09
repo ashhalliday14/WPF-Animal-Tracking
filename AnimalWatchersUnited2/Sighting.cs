@@ -8,9 +8,9 @@ namespace AnimalWatchersUnited2
 {
     public class Sighting : Animal
     {
+        public string Username { get; set; }
         public string SightingLocation { get; set; }
-        public int Size { get; set; }
-        public int Quantity { get; set; }
+        public string Size { get; set; }
         public string Sex { get; set; }
     }
 }

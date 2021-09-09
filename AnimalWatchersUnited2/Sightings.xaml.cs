@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +19,7 @@ namespace AnimalWatchersUnited2
     /// <summary>
     /// Interaction logic for Sightings.xaml
     /// </summary>
-    public partial class Sightings : Window
+    public partial class Sightings : Window 
     {
         public Sightings()
         {
@@ -63,6 +65,110 @@ namespace AnimalWatchersUnited2
         {
             Sightings sightings = new Sightings();
             sightings.Show();
+            this.Close();
+        }
+
+        private void ViewSightings(object sender, RoutedEventArgs e)
+        {
+            string username = inputUsername.Text;
+
+            Sighting sighting = new Sighting();
+            string[] SightingArray;
+            var sightings = new List<string[]>();
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("User", typeof(string));
+            dt.Columns.Add("Type", typeof(string));
+            dt.Columns.Add("Category", typeof(string));
+            dt.Columns.Add("Colour", typeof(string));
+            dt.Columns.Add("Origin", typeof(string));
+            dt.Columns.Add("Location", typeof(string));
+            dt.Columns.Add("Size", typeof(string));
+            dt.Columns.Add("Sex", typeof(string));
+
+            using (StreamReader reader = new StreamReader(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\sightings.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    SightingArray = reader.ReadLine().Split(',');
+
+                    foreach (var sight in sightings)
+                    {
+                        if (sighting.Username == username)
+                        {
+                            MessageBox.Show(sighting.Username);
+                            sighting.Username = SightingArray[0];
+                            sighting.Type = SightingArray[1];
+                            sighting.Category = SightingArray[2];
+                            sighting.Colour = SightingArray[3];
+                            sighting.Origin = SightingArray[4];
+                            sighting.SightingLocation = SightingArray[5];
+                            sighting.Size = SightingArray[6];
+                            sighting.Sex = SightingArray[7];
+                            continue;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No Sightings for this User");
+                        }
+                    }
+                    //if (username == SightingArray[0])
+                    //{
+                    //    sighting.Username = SightingArray[0];
+                    //    sighting.Type = SightingArray[1];
+                    //    sighting.Category = SightingArray[2];
+                    //    sighting.Colour = SightingArray[3];
+                    //    sighting.Origin = SightingArray[4];
+                    //    sighting.SightingLocation = SightingArray[5];
+                    //    sighting.Size = SightingArray[6];
+                    //    sighting.Sex = SightingArray[7];
+                    //}
+                    //sighting.Username = SightingArray[0];
+                    //sighting.Type = SightingArray[1];
+                    //sighting.Category = SightingArray[2];
+                    //sighting.Colour = SightingArray[3];
+                    //sighting.Origin = SightingArray[4];
+                    //sighting.SightingLocation = SightingArray[5];
+                    //sighting.Size = SightingArray[6];
+                    //sighting.Sex = SightingArray[7];
+
+                    dgSightings.Columns.Count();
+                    SightingArray.Count();
+
+                    dt.Rows.Add(SightingArray);
+
+                    DataView dv = new DataView(dt);
+                    dgSightings.ItemsSource = dv;
+                }
+                EnterUsernamePopup.IsOpen = false;
+            }
+        }
+
+        private void btnGetData_Click(object sender, RoutedEventArgs e)
+        {
+            EnterUsernamePopup.IsOpen = true;
+        }
+
+        private void btnAddData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEditData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //click wishlist button
+        private void ClickWishlists(object sender, RoutedEventArgs e)
+        {
+            Wishlists wishlist = new Wishlists();
+            wishlist.Show();
             this.Close();
         }
     }
