@@ -99,7 +99,7 @@ namespace AnimalWatchersUnited2
 
         private void btnEditData_Click(object sender, RoutedEventArgs e)
         {
-
+            editAnimalPopup.IsOpen = true;
         }
 
         //user clicks delete animal button
@@ -131,7 +131,7 @@ namespace AnimalWatchersUnited2
         }
 
         //delete an animal
-        private void DeleteCategory(object sender, RoutedEventArgs e)
+        private void DeleteAnimal(object sender, RoutedEventArgs e)
         {
             //take user input for animal 
             string category = inputAnimalDelete.Text;
@@ -195,7 +195,7 @@ namespace AnimalWatchersUnited2
         }
 
         //edit animal popup
-        private void EditCategory(object sender, RoutedEventArgs e)
+        private void EditAnimal(object sender, RoutedEventArgs e)
         {
             //get user input
             string oldAnimal = inputEditAnimal.Text;
@@ -213,20 +213,31 @@ namespace AnimalWatchersUnited2
 
                 while ((line = reader.ReadLine()) != null)
                 {
-                    for (int i = 0; i < lines.Count; i++)
-                    {
-                        String[] split = line.Split(','); //split lines with comma
+                    String[] split = line.Split(','); //split lines with comma
 
-                        if (split[0].Contains(oldAnimal, category, colour, origin)) //chck line contains animal entered
-                        {
-                            split[0] = newAnimal;
-                            line = String.Join(",", split);
-                        }
+                    if (split[0].Contains(oldAnimal)) //check line contains animal entered
+                    {
+                        //add new animal details
+                        split[0] = newAnimal;
+                        split[1] = category;
+                        split[2] = colour;
+                        split[3] = origin;
+                        line = String.Join(",", split);
                     }
 
-                    lines.Add(line); //add new category to list
+                    lines.Add(line); //add new animal to list
                 }
             }
+            //write to csv
+            using (StreamWriter writer = new StreamWriter(@"C:\Users\ashle\OneDrive\Documents\Uni\Level 5\Object Orientated Programming\Practical\CSV Files\animal.csv", false))
+            {
+                foreach (String line in lines)
+                {
+                    writer.WriteLine(line); //write the new animal to the csv file
+                }
+                    
+            }
+            editAnimalPopup.IsOpen = false;
         }
     }
 }

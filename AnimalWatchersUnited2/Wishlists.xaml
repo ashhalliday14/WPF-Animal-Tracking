@@ -30,5 +30,71 @@
         <Button Click="ClickSightings" Content="Sightings" Grid.Column="3" Grid.Row="1" Height="50px" Width="110px" Margin="12,0,10,50" />
         <Button Click="ClickWishlists" Content="Wishlist" Grid.Column="4" Grid.Row="1" Height="50px" Width="110px" Margin="12,0,10,50"/>
         <Button Click="ClickLogout" Content="Logout" Grid.Column="5" Grid.Row="1" Height="50px" Width="110px" Margin="10,0,10,50"/>
+
+        <DockPanel Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="6" HorizontalAlignment="Left" >
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Button Name="btnGetData" Content="View Wishlist" Click="btnGetData_Click"/>
+                <Button Name="btnAddData" Content="Add Wishlist" Click="btnAddData_Click"/>
+                <Button Name="btnEditData" Content="Edit Wishlist" Click="btnEditData_Click"/>
+                <Button Name="btnDeleteData" Content="Delete Wishlist" Click="btnDeleteData_Click"/>
+            </StackPanel>
+            <DataGrid Name="dgWishlists" AutoGenerateColumns="True" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Width="650"/>
+        </DockPanel>
+
+        <Popup Name="EnterUsernamePopup" IsOpen="False">
+            <Grid Height="182" Width="400" Background="White" >
+                <Label Content="Enter your Username:" Height="28" HorizontalAlignment="Left" Margin="131,22,0,0" Name="label1" VerticalAlignment="Top" RenderTransformOrigin="0.527,-0.062" />
+                <TextBox x:Name="inputUsername" Height="23" HorizontalAlignment="Left" Margin="131,67,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.962,-0.026" />
+
+                <Button Content="View your Wishlist" Height="20" Margin="131,111,159,49" Click="ViewSightings"/>
+            </Grid>
+        </Popup>
+
+        <Popup Name="addWishlistPopup" IsOpen="False">
+            <Grid Height="410" Width="400" Background="White" >
+                <Label Content="Your Username:" Height="28" HorizontalAlignment="Left" Margin="39,34,0,0" Name="label2" VerticalAlignment="Top" RenderTransformOrigin="0.527,-0.062" />
+                <TextBox x:Name="inputUser" Height="23" HorizontalAlignment="Left" Margin="187,34,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.962,-0.026" />
+                <Label Content="Input Animal Type:" Height="28" HorizontalAlignment="Left" Margin="39,67,0,0" Name="label3" VerticalAlignment="Top" />
+                <TextBox x:Name="inputAnimal" Height="23" HorizontalAlignment="Left" Margin="187,67,0,0" VerticalAlignment="Top" Width="120" />
+                <Label Content="Input Animal Category:" Height="28" HorizontalAlignment="Left" Margin="39,100,0,0" Name="label4" VerticalAlignment="Top" RenderTransformOrigin="0.481,1.179" />
+                <TextBox x:Name="inputCategory" Height="23" HorizontalAlignment="Left" Margin="187,100,0,0" VerticalAlignment="Top" Width="120" />
+                <Label Content="Input Animal Colour:" Height="28" HorizontalAlignment="Left" Name="label5" VerticalAlignment="Top" RenderTransformOrigin="0.481,1.179" Margin="39,133,0,0" />
+                <TextBox x:Name="inputColour" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="187,138,0,0" />
+                <Label Content="Input Animal Size:" Height="28" HorizontalAlignment="Left" Name="label8" VerticalAlignment="Top" RenderTransformOrigin="0.481,1.179" Margin="43,170,0,0" />
+                <TextBox x:Name="inputSize" Height="24" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="187,170,0,0"  />
+                <Label Content="Input Animal Sex:" Height="28" HorizontalAlignment="Left" Name="label9" VerticalAlignment="Top" RenderTransformOrigin="0.481,1.179" Margin="46,203,0,0" />
+                <TextBox x:Name="inputSex" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="187,208,0,0" />
+
+                <Button Content="Add Wishlist" Height="20" Width="100" Margin="137,262,163,124" Click="AddWishlist" />
+            </Grid>
+        </Popup>
+
+        <Popup Name="editWishlistPopup" IsOpen="False">
+            <Grid Height="500" Width="400" Background="White" >
+                <Label Content="Enter Username:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label10" VerticalAlignment="Top" RenderTransformOrigin="0.94,0.101" />
+                <TextBox x:Name="inputUsername1" Height="23" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="120" />
+                <Label Content="Enter Existing Animal Type:" Height="28" HorizontalAlignment="Left" Name="label18" VerticalAlignment="Top" Margin="0,45,0,0"/>
+                <TextBox x:Name="inputOldAnimal" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,50,0,0" RenderTransformOrigin="0.478,0.001"/>
+                <Label Content="Enter New Animal Type:" Height="28" HorizontalAlignment="Left" Name="label11" VerticalAlignment="Top" Margin="7,122,0,0"/>
+                <TextBox x:Name="inputNewAnimal" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,122,0,0" />
+                <Label Content="Enter New Animal Category:" Height="28" HorizontalAlignment="Left" Name="label12" VerticalAlignment="Top" Margin="-7,173,0,0"/>
+                <TextBox x:Name="inputNewCategory" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="171,173,0,0"  />
+                <Label Content="Enter New Animal Colour:" Height="28" HorizontalAlignment="Left" Name="label13" VerticalAlignment="Top" Margin="6,217,0,0"/>
+                <TextBox x:Name="inputNewColour" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,217,0,0"   />
+                <Label Content="Enter New Animal Size:" Height="28" HorizontalAlignment="Left" Name="label116" VerticalAlignment="Top" Margin="13,264,0,0" />
+                <TextBox x:Name="inputNewSize" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="171,264,0,0" />
+                <Label Content="Enter New Animal Sex:" Height="28" HorizontalAlignment="Left" Name="label117" VerticalAlignment="Top" Margin="16,313,0,0" RenderTransformOrigin="0.588,-0.776"/>
+                <TextBox x:Name="inputNewSex" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="171,313,0,0" />
+                <Button Content="Edit Wishlist" Height="20" Width="100" Margin="121,368,179,112" Click="EditWishlist" RenderTransformOrigin="0.493,1.136"/>
+            </Grid>
+        </Popup>
+
+        <Popup Name="deleteWishlistPopup" IsOpen="False">
+            <Grid Height="150" Width="400" Background="White" >
+                <Label Content="Enter Animal Name To Delete:" Height="28" HorizontalAlignment="Left" Margin="105,22,0,0" Name="label19" VerticalAlignment="Top" />
+                <TextBox x:Name="inputAnimalDelete" Height="23" HorizontalAlignment="Left" Margin="131,55,0,0" VerticalAlignment="Top" Width="120" />
+                <Button Content="Delete Wishlist" Height="20" Width="100" Margin="141,103,159,27" Click="DeleteWishlist"/>
+            </Grid>
+        </Popup>
     </Grid>
 </Window>

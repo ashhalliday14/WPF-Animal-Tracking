@@ -185,15 +185,12 @@ namespace AnimalWatchersUnited2
 
                 while ((line = reader.ReadLine()) != null)
                 {
-                    for(int i = 0; i < lines.Count; i++)
-                    {
-                        String[] split = line.Split(','); //split lines with comma
+                    String[] split = line.Split(','); //split lines with comma
 
-                        if (split[0].Contains(oldCategory)) //chck line contains category entered
-                        {
-                            split[0] = newCategory;
-                            line = String.Join(",", split);
-                        }
+                    if (split[0].Contains(oldCategory)) //chck line contains category entered
+                    {
+                        split[0] = newCategory;
+                        line = String.Join(",", split);
                     }
 
                     lines.Add(line); //add new category to list

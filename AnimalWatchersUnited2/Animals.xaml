@@ -63,11 +63,11 @@
             <Grid Height="150" Width="400" Background="White" >
                 <Label Content="Enter Animal Name To Delete:" Height="28" HorizontalAlignment="Left" Margin="105,22,0,0" Name="label5" VerticalAlignment="Top" />
                 <TextBox x:Name="inputAnimalDelete" Height="23" HorizontalAlignment="Left" Margin="131,55,0,0" VerticalAlignment="Top" Width="120" />
-                <Button Content="Delete Animal" Height="20" Width="100" Margin="141,103,159,27" Click="DeleteCategory"/>
+                <Button Content="Delete Animal" Height="20" Width="100" Margin="141,103,159,27" Click="DeleteAnimal"/>
             </Grid>
         </Popup>
 
-        <Popup Name="editCategoryPopup" IsOpen="False">
+        <Popup Name="editAnimalPopup" IsOpen="False">
             <Grid Height="500" Width="400" Background="White" >
                 <Label Content="Enter Animal Type:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label6" VerticalAlignment="Top" RenderTransformOrigin="0.94,0.101" />
                 <TextBox x:Name="inputEditAnimal" Height="23" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="120" />
@@ -79,7 +79,7 @@
                 <TextBox x:Name="inputNewColour" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,170,0,0"   />
                 <Label Content="Enter New Animal Origin:" Height="28" HorizontalAlignment="Left" Name="label10" VerticalAlignment="Top" Margin="13,208,0,0" />
                 <TextBox x:Name="inputNewOrigin" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="170,213,0,0"   />
-                <Button Content="Edit Animal" Height="20" Width="100" Margin="141,192,159,88" Click="EditCategory" RenderTransformOrigin="0.493,1.136"/>
+                <Button Content="Edit Animal" Height="20" Width="100" Margin="141,192,159,88" Click="EditAnimal" RenderTransformOrigin="0.493,1.136"/>
             </Grid>
         </Popup>
 
