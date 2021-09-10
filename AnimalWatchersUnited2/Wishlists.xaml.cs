@@ -112,7 +112,7 @@ namespace AnimalWatchersUnited2
         }
 
         //user clicks view sightings
-        private void ViewSightings(object sender, RoutedEventArgs e)
+        private void ViewWishlists(object sender, RoutedEventArgs e)
         {
             //take user input for their username
             string username = inputUsername.Text;
@@ -136,27 +136,23 @@ namespace AnimalWatchersUnited2
                 while (!reader.EndOfStream)
                 {
                     WishlistArray = reader.ReadLine().Split(','); //split with a comma
-
+                    MessageBox.Show(WishlistArray[0]);
+                    MessageBox.Show(username);
                     foreach (var wish in wishlists) //iterate through lines
                     {
-                        if (wishlist.Username == username) //check line starts with username that matches what user entered
-                        {
-                            //position of all data in array
-                            wishlist.Username = WishlistArray[0];
-                            wishlist.Type = WishlistArray[1];
-                            wishlist.Category = WishlistArray[2];
-                            wishlist.Colour = WishlistArray[3];
-                            wishlist.Size = WishlistArray[4];
-                            wishlist.Sex = WishlistArray[5];
-                            continue;
-                        }
-                        else
-                        {
-                            MessageBox.Show("No Wishlist for this User");
-                        }
+                        //position of all data in array
+                        wishlist.Username = WishlistArray[0];
+                        wishlist.Type = WishlistArray[1];
+                        wishlist.Category = WishlistArray[2];
+                        wishlist.Colour = WishlistArray[3];
+                        wishlist.Size = WishlistArray[4];
+                        wishlist.Sex = WishlistArray[5];               
                     }
 
-                    dt.Rows.Add(WishlistArray); //add data to wishlist array
+                    if (WishlistArray[0].Equals(username)) //check username entered equals wishlist
+                    {
+                        dt.Rows.Add(WishlistArray); //add data to wishlist array
+                    }
 
                     DataView dv = new DataView(dt); //input data into datatable
                     dgWishlists.ItemsSource = dv; //display data in datatable
@@ -183,7 +179,7 @@ namespace AnimalWatchersUnited2
                 //write the input into the csv
                 writer.WriteLine("{0},{1},{2},{3},{4},{5}", user, animal, category, colour, size, sex.ToString());
 
-                MessageBox.Show("Wishlist Added! Click View Signtings to Display!");
+                MessageBox.Show("Wishlist Added! Click View Wishlists to Display!");
             }
             //close the popup
             addWishlistPopup.IsOpen = false;

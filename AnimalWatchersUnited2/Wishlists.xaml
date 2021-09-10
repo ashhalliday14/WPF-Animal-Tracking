@@ -46,7 +46,7 @@
                 <Label Content="Enter your Username:" Height="28" HorizontalAlignment="Left" Margin="131,22,0,0" Name="label1" VerticalAlignment="Top" RenderTransformOrigin="0.527,-0.062" />
                 <TextBox x:Name="inputUsername" Height="23" HorizontalAlignment="Left" Margin="131,67,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.962,-0.026" />
 
-                <Button Content="View your Wishlist" Height="20" Margin="131,111,159,49" Click="ViewSightings"/>
+                <Button Content="View your Wishlist" Height="20" Margin="131,111,159,49" Click="ViewWishlists"/>
             </Grid>
         </Popup>
 

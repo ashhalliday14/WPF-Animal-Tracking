@@ -159,7 +159,10 @@ namespace AnimalWatchersUnited2
                         }
                     }
 
-                    dt.Rows.Add(SightingArray); //add all data to the array
+                    if (SightingArray[0].Equals(username))
+                    {
+                        dt.Rows.Add(SightingArray); //add all data to the array
+                    }
 
                     DataView dv = new DataView(dt); //add data into the datatable
                     dgSightings.ItemsSource = dv; //display all data in the datatable
@@ -188,7 +191,7 @@ namespace AnimalWatchersUnited2
                 //write the input into the csv
                 writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7}", user, animal, category, colour, origin, location, size, sex.ToString());
 
-                MessageBox.Show("Signting Added! Click View Signtings to Display!");
+                MessageBox.Show("Signting Added! Click View Sightings to Display!");
             }
             //close the popup
             addSightingPopup.IsOpen = false;
