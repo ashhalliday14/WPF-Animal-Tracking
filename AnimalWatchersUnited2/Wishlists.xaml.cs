@@ -136,8 +136,7 @@ namespace AnimalWatchersUnited2
                 while (!reader.EndOfStream)
                 {
                     WishlistArray = reader.ReadLine().Split(','); //split with a comma
-                    MessageBox.Show(WishlistArray[0]);
-                    MessageBox.Show(username);
+
                     foreach (var wish in wishlists) //iterate through lines
                     {
                         //position of all data in array
